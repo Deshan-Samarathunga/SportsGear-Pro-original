@@ -1,0 +1,100 @@
+/* Logo styling */
+.logo {
+  height: 40px;
+  user-select: none;
+}
+
+.unselectable {
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+/* Global font size for navbar */
+.navbar {
+  font-size: 1.6rem;
+}
+
+/* Transparent Navbar - Home Page only */
+.navbar-transparent {
+  background-color: transparent !important;
+  transition: background-color 0.3s ease;
+}
+
+/* On hover: navbar turns solid on HomePage */
+.navbar-transparent:hover {
+  background-color: #F57C51 !important;
+}
+
+/* Solid Navbar - all other pages */
+.navbar-solid {
+  background-color: #F57C51 !important;
+  transition: background-color 0.3s ease;
+}
+
+/* Nav links */
+.navbar-nav .nav-link {
+  font-weight: 500;
+  color: #ffffff !important;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease;
+}
+
+/* Nav link hover effect */
+.navbar-nav .nav-link:hover {
+  color: #000000 !important;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
+}
+
+/* Underline animation */
+.hover-underline-animation {
+  position: relative;
+}
+
+.hover-underline-animation::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: rgb(0, 0, 0);
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.hover-underline-animation:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Optional: if nav items are buttons */
+.navbar-nav .nav-item button.nav-link {
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  display: inline-block;
+  width: 100%;
+  text-align: left;
+}
+
+/* Primary button override (e.g., "Join Us") */
+.btn-primary {
+  background-color: #F57C51 !important;
+  border-color: #F57C51 !important;
+}
+
+
+/* Separator styling between nav links */
+.nav-separator {
+  color: #fff;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  font-weight: 300;
+  opacity: 0.7;
+}
+
