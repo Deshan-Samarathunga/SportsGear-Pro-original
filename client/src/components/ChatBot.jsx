@@ -20,13 +20,13 @@ const ChatBot = () => {
       const response = await axios.post(
         "https://api.openai.com/v1/chat/completions",
         {
-          model: "gpt-3.5-turbo", // Use "gpt-4" if you have access
+          model: "gpt-3.5-turbo",
           messages: [{ role: "user", content: input }],
         },
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer YOUR_OPENAI_API_KEY`, // Replace with your actual API key
+            Authorization: `Bearer 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`,
           },
         }
       );
