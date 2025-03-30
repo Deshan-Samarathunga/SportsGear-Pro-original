@@ -1,16 +1,28 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "./SignInPage.css";
 
 const SignInPage = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [form, setForm] = useState({ email: "", password: "" });
 
-  const togglePassword = () => {
-    setShowPassword(!showPassword);
+  const togglePassword = () => setShowPassword(!showPassword);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted");
+    try {
+      const res = await axios.post("http://localhost:5000/api/auth/login", form);
+      alert("Login successful!");
+      localStorage.setItem("token", res.data.token);
+      // Optional: navigate or update auth state
+    } catch (err) {
+      alert(err?.response?.data?.msg || "Login failed");
+    }
   };
 
   return (
@@ -29,6 +41,8 @@ const SignInPage = () => {
                 id="email"
                 placeholder="Enter Email Address"
                 required
+                value={form.email}
+                onChange={handleChange}
               />
             </div>
 
@@ -41,6 +55,8 @@ const SignInPage = () => {
                   id="password"
                   placeholder="Enter Password"
                   required
+                  value={form.password}
+                  onChange={handleChange}
                 />
                 <i
                   className={`ri-${showPassword ? "eye-line" : "eye-off-line"}`}
@@ -52,8 +68,8 @@ const SignInPage = () => {
 
             <div className="row space-between">
               <div className="form-group-row">
-                <input type="checkbox" name="terms" id="terms" />
-                <label htmlFor="terms">
+                <input type="checkbox" name="remember" id="remember" />
+                <label htmlFor="remember">
                   <p>Remember Me</p>
                 </label>
               </div>
