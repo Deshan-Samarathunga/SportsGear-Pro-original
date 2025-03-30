@@ -1,0 +1,135 @@
+/* Minimal reset for "Terms of Service" button-link */
+.btn-link {
+    background: none;
+    border: none;
+    color: #F57C51;
+    padding: 0;
+    font: inherit;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 1rem; /* Increased font size for better visibility */
+  }
+  
+  /* Main container for the Sign Up Page */
+  .register {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 6rem 2rem 2rem; /* added top space for navbar */
+    background-color: #ffffff;
+  }
+  
+  /* Container for form */
+  .signup-container {
+    max-width: 500px;
+    width: 100%;
+    background: #fff;
+    border-radius: 12px;
+    padding: 3rem 2rem; /* Increased padding for better spacing */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+  
+  /* Form Heading */
+  .signup-form h3 {
+    text-align: center;
+    font-size: 2rem; /* Larger font size */
+    font-weight: 700;
+    margin-bottom: 0.5rem; /* Added margin for space */
+    color: #002e3f;
+  }
+  
+  /* Subheading text */
+  .signup-form p {
+    text-align: center;
+    color: #6c757d;
+    font-size: 1.05rem; /* Increased font size */
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Brand name styling */
+  .signup-form .brand-name {
+    color: #F57C51;
+    font-weight: 600;
+  }
+  
+  /* Form Group Style */
+  .form-group {
+    margin-bottom: 1.5rem; /* Increased bottom margin */
+  }
+  
+  /* Label styling */
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.4rem; /* Added space between label and input */
+    color: #333;
+    font-size: 1rem; /* Increased font size */
+  }
+  
+  /* Input fields style */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 0.75rem 1rem; /* Increased padding for easier typing */
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    background-color: #f8f9fa;
+    font-size: 1rem; /* Increased font size */
+  }
+  
+  /* Password visibility toggle icon styling */
+  .password-wrapper {
+    position: relative;
+  }
+  
+  .password-wrapper i {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 1.2rem; /* Slightly larger icon */
+  }
+  
+  /* Checkbox and "Terms of Service" styling */
+  .form-group-row.checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 1rem; /* Increased font size for checkbox label */
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-group-row a {
+    color: #F57C51;
+    text-decoration: underline;
+  }
+  
+  /* Main Submit Button styling */
+  .btn.main-btn {
+    width: 100%;
+    background-color: #F57C51;
+    border: none;
+    padding: 0.85rem;
+    font-weight: 600;
+    color: #fff;
+    font-size: 1.1rem; /* Larger font size */
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+  }
+  
+  /* Hover effect for submit button */
+  .btn.main-btn:hover {
+    background-color: #F57C51;
+  }
+  
+  /* Sign up footer text */
+  .signup-content > p {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 1rem; /* Increased font size */
+  }
+  
