@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import bgvideo from "../assets/video/bgvideo.mp4";
+import ChatBot from "../components/ChatBot"; 
 import "./HomePage.css";
 
 const HomePage = () => {
@@ -22,6 +23,7 @@ const HomePage = () => {
           Join Us
         </Link>
       </div>
+      <ChatBot />
     </section>
   );
 };
