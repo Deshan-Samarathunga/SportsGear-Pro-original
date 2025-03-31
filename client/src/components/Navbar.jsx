@@ -1,24 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/logo/2wide white logo.png";
+import { AuthContext } from '../context/AuthContext';
+import ProfileDropdown from "./ProfileDropdown";
 
 const Navbar = () => {
   const location = useLocation();
   const isHome = location.pathname === "/";
+  const { user } = useContext(AuthContext);
 
   const navItems = [
     { label: "Home", to: "/" },
     { label: "Products", to: "/products" },
     { label: "About", to: "/about" },
     { label: "Contact Us", to: "/contact" },
-    { label: "Sign in", to: "/signin" },
-    { label: "Sign up", to: "/signup" },
   ];
 
   return (
     <nav
-      className={`navbar navbar-expand-lg navbar-dark py-3 fixed-top ${isHome ? "navbar-transparent" : "navbar-solid"
-        }`}
+      className={`navbar navbar-expand-lg navbar-dark py-3 fixed-top ${isHome ? "navbar-transparent" : "navbar-solid"}`}
       id="navbar"
     >
       <div className="container">
@@ -55,13 +55,34 @@ const Navbar = () => {
                     {item.label}
                   </Link>
                 </li>
-                {index < navItems.length - 1 && (
-                  <li className="nav-separator">|</li>
-                )}
+                {index < navItems.length - 1 && <li className="nav-separator">|</li>}
               </React.Fragment>
             ))}
-          </ul>
 
+            {!user ? (
+              <>
+                <li className="nav-separator">|</li>
+                <li className="nav-item">
+                  <Link className="nav-link hover-underline-animation" to="/signin">
+                    Sign In
+                  </Link>
+                </li>
+                <li className="nav-separator">|</li>
+                <li className="nav-item">
+                  <Link className="nav-link hover-underline-animation" to="/signup">
+                    Sign Up
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="nav-separator">|</li>
+                <li className="nav-item">
+                  <ProfileDropdown />
+                </li>
+              </>
+            )}
+          </ul>
         </div>
       </div>
     </nav>

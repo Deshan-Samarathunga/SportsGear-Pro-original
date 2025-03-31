@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
+import { AuthContext } from '../context/AuthContext';
+import { useNavigate } from "react-router-dom";
 import "./SignUpPage.css";
 
 const SignUpPage = () => {
@@ -11,6 +13,8 @@ const SignUpPage = () => {
     conPassword: "",
     terms: false,
   });
+  const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const togglePassword = () => setShowPassword(!showPassword);
 
@@ -24,28 +28,31 @@ const SignUpPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (form.password !== form.conPassword) {
       alert("Password Mismatch!");
       return;
     }
-
+  
     if (!form.terms) {
       alert("You must accept the Terms of Services.");
       return;
     }
-
+  
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/register", {
+      await axios.post("http://localhost:5000/api/auth/register", {
         name: form.name,
         email: form.email,
         password: form.password,
       });
-      alert("Registration successful!");
+  
+      alert("Sign up successful!");
+      navigate("/signin"); // ✅ redirect to sign-in page
     } catch (err) {
       alert(err?.response?.data?.msg || "Registration failed");
     }
   };
+  
 
   return (
     <section className="register">

@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
+import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import "./SignInPage.css";
 
 const SignInPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [form, setForm] = useState({ email: "", password: "" });
+
+  const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const togglePassword = () => setShowPassword(!showPassword);
 
@@ -17,9 +22,15 @@ const SignInPage = () => {
     e.preventDefault();
     try {
       const res = await axios.post("http://localhost:5000/api/auth/login", form);
+      
       alert("Login successful!");
       localStorage.setItem("token", res.data.token);
-      // Optional: navigate or update auth state
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+
+
+      login(res.data.user);     // ✅ update context
+      navigate("/");            // ✅ go to home page
+
     } catch (err) {
       alert(err?.response?.data?.msg || "Login failed");
     }
@@ -69,9 +80,7 @@ const SignInPage = () => {
             <div className="row space-between">
               <div className="form-group-row">
                 <input type="checkbox" name="remember" id="remember" />
-                <label htmlFor="remember">
-                  <p>Remember Me</p>
-                </label>
+                <label htmlFor="remember"><p>Remember Me</p></label>
               </div>
               <button
                 type="button"

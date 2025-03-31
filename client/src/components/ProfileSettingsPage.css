@@ -1,0 +1,146 @@
+/* Profile Page Container */
+.profile-settings-page {
+  display: flex;
+  padding: 60px 40px;
+  background-color: #f9f9f9;
+  font-family: 'Josefin Slab', serif;
+  min-height: 100vh;
+  margin-top: 90px; /* Extra spacing below navbar */
+}
+
+/* Sidebar */
+.sidebar {
+  flex: 1;
+  max-width: 280px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  padding: 30px 20px;
+  text-align: center;
+  margin-right: 40px;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 12px;
+}
+
+.sidebar h4 {
+  margin: 8px 0 4px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.sidebar p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.sidebar-btn {
+  display: block;
+  width: 100%;
+  padding: 10px 14px;
+  margin: 10px 0;
+  border: none;
+  background-color: #fff;
+  border-left: 4px solid transparent;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+.sidebar-btn:hover,
+.sidebar-btn.active {
+  background-color: #ffe5d4;
+  border-left: 4px solid #f46b45;
+  color: #f46b45;
+}
+
+.logout {
+  color: red;
+  border-top: 1px solid #eee;
+  margin-top: 18px;
+  padding-top: 12px;
+}
+
+/* Main Form */
+.main-content {
+  flex: 3;
+  background-color: #fff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.profile-form h3 {
+  margin-top: 0;
+  font-weight: 600;
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 18px;
+}
+
+.image-upload {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-bottom: 35px;
+}
+
+.preview-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+.profile-form label {
+  display: block;
+  font-weight: 500;
+  margin-top: 15px;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.profile-form input,
+.profile-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  background-color: #f8f8f8;
+  margin-bottom: 12px;
+  outline: none;
+}
+
+.profile-form input:disabled {
+  background-color: #eee;
+  color: #777;
+}
+
+.main-btn {
+  background-color: #f46b45;
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 30px;
+  width: 200px;
+  text-align: center;
+  display: block;
+  transition: background 0.3s ease;
+}
+
+.main-btn:hover {
+  background-color: #e55c35;
+}

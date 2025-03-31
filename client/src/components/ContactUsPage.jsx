@@ -1,5 +1,9 @@
 import React from "react";
 import "./ContactUsPage.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLocationDot, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+
+
 
 const ContactPage = () => {
   return (
@@ -62,21 +66,22 @@ const ContactPage = () => {
           <h2>Contact Info</h2>
           <ul>
             <li>
-              <img src="/assets/images/location.png" alt="location" />
-              <span>Location: Dehiwala, Colombo</span>
+              <FontAwesomeIcon icon={faLocationDot} style={{ marginRight: "10px" }} />
+              <span>Location: Asgiriya, Gampaha</span>
             </li>
             <li>
-              <img src="/assets/images/phone.png" alt="phone" />
+              <FontAwesomeIcon icon={faPhone} style={{ marginRight: "10px" }} />
               <span>Contact Number: 964-622-3903</span>
             </li>
             <li>
-              <img src="/assets/images/mail.png" alt="email" />
-              <span>Email: rentride@contact.com</span>
+              <FontAwesomeIcon icon={faEnvelope} style={{ marginRight: "10px" }} />
+              <span>Email: sportsgearpro@contact.com</span>
             </li>
           </ul>
+
           <iframe
             title="map"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14236.05504441497!2d79.86969128404569!3d6.834866173546113!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae25a8d6ec1f8c3%3A0x47810f3e7d084753!2sDehiwala-Mount%20Lavinia!5e0!3m2!1sen!2slk!4v1685131915124!5m2!1sen!2slk"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31675.067775326752!2d79.99171355202536!3d7.081464785426585!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2fb67a22e72d9%3A0x913a2c56a49c8d8e!2sGampaha!5e0!3m2!1sen!2slk!4v1743402488697!5m2!1sen!2slk"
             width="100%"
             height="300"
             style={{ border: 0 }}
