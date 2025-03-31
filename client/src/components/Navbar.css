@@ -104,3 +104,86 @@
   gap: 10px;
   cursor: pointer;
 }
+
+.navbar-nav .nav-link.active {
+  color: #fff !important;
+  font-weight: 600;
+  border-bottom: 2px solid #fff;
+}
+
+.profile-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+
+.profile-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-dropdown {
+  position: absolute;
+  right: 0;
+  top: 48px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 0.75rem 1rem;
+  color: #000;
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  min-width: 180px;
+}
+
+.profile-dropdown.open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.profile-dropdown p.dropdown-name {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: #007bff;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
+}
+
+.profile-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 0 8px;
+  height: 100%;
+}
+
+.profile-name {
+  margin-top: 2px; /* optional small adjustment */
+}
+
+
+.profile-name {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.6rem; /* Match the navbar font-size */
+  white-space: nowrap;
+  color: #fff;
+  line-height: 1.2;
+  font-family: 'Poppins', sans-serif;
+}
