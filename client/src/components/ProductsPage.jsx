@@ -28,13 +28,6 @@ const ProductPage = () => {
   return (
     <section className="product-page">
       <div className="controls">
-        <input
-          type="text"
-          placeholder="Search cars..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="search-input"
-        />
         <select
           className="category-select"
           value={selectedCategory}
@@ -46,7 +39,16 @@ const ProductPage = () => {
             </option>
           ))}
         </select>
+
+        <input
+          type="text"
+          placeholder="Search cars..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-input"
+        />
       </div>
+
 
       <div className="container">
         <div className="grid-3">
@@ -74,10 +76,6 @@ const ProductPage = () => {
                 <hr />
                 <div className="row between">
                   <h3>Rs.{vehicle.price} <span>/ Day</span></h3>
-                </div>
-                <div className="row buttons">
-                  <button className="buy-btn">Buy Now</button>
-                  <button className="cart-btn">Add to Cart</button>
                 </div>
               </div>
             </div>
