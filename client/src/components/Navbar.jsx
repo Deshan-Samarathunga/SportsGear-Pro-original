@@ -49,7 +49,7 @@ const Navbar = () => {
               <React.Fragment key={item.label}>
                 <li className="nav-item">
                   <Link
-                    className="nav-link hover-underline-animation"
+                    className={`nav-link hover-underline-animation ${location.pathname === item.to ? "active" : ""}`}
                     to={item.to}
                   >
                     {item.label}
@@ -63,13 +63,13 @@ const Navbar = () => {
               <>
                 <li className="nav-separator">|</li>
                 <li className="nav-item">
-                  <Link className="nav-link hover-underline-animation" to="/signin">
+                  <Link className={`nav-link hover-underline-animation ${location.pathname === "/signin" ? "active" : ""}`} to="/signin">
                     Sign In
                   </Link>
                 </li>
                 <li className="nav-separator">|</li>
                 <li className="nav-item">
-                  <Link className="nav-link hover-underline-animation" to="/signup">
+                  <Link className={`nav-link hover-underline-animation ${location.pathname === "/signup" ? "active" : ""}`} to="/signup">
                     Sign Up
                   </Link>
                 </li>
