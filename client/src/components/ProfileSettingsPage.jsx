@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./ProfileSettingsPage.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import SidebarMenu from "./SidebarMenu";
+
 
 const ProfileSettingsPage = () => {
   const [profile, setProfile] = useState({
@@ -13,6 +16,8 @@ const ProfileSettingsPage = () => {
     image: null,
     imageUrl: "", // this holds the saved image path
   });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("user"));
@@ -103,27 +108,11 @@ const ProfileSettingsPage = () => {
     }
   };
 
+  const user = JSON.parse(localStorage.getItem("user"));
+
   return (
     <div className="profile-settings-page">
-      <div className="sidebar">
-        <img
-          src={
-            profile.imageUrl
-              ? `http://localhost:5000${profile.imageUrl}?t=${Date.now()}`
-              : "/profile.png"
-          }
-          alt="profile"
-          className="preview-img"
-        />
-
-        <h4>{profile.name || "User Name"}</h4>
-        <p>{profile.email}</p>
-        <button className="btn sidebar-btn active">Profile Setting</button>
-        <button className="btn sidebar-btn">Change Password</button>
-        <button className="btn sidebar-btn">My Booking</button>
-        <button className="btn sidebar-btn logout">Logout</button>
-      </div>
-
+      <SidebarMenu user={user} />
       <div className="main-content">
         <form className="profile-form" onSubmit={handleSubmit}>
           <h3>Update Profile Picture</h3>
