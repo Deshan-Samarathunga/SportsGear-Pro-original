@@ -30,7 +30,9 @@ const ProfileDropdown = () => {
         className="profile-trigger"
         onClick={() => setOpen(!open)}
       >
-        <p className="profile-name">{user?.name}</p>
+        <span className="nav-link hover-underline-animation profile-name-text">
+          {user?.name}
+        </span>
         <img
           src={user?.image ? `http://localhost:5000${user.image}` : "/profile.png"}
           alt="profile"
@@ -38,17 +40,13 @@ const ProfileDropdown = () => {
         />
       </div>
 
-      <div className={`profile-dropdown ${open ? 'open' : ''}`}>
+      <div className={`profile-dropdown ${open ? "open" : ""}`}>
         <p className="dropdown-name">{user?.name}</p>
         <hr />
-        <button onClick={() => navigate("/profile")} className="btn-link">
-          Profile Settings
-        </button>
-        <br />
-        <button onClick={handleLogout} className="btn-link">
-          Logout
-        </button>
+        <a href="/profile">Profile Settings</a>
+        <button onClick={handleLogout} className="dropdown-link">Logout</button>
       </div>
+
     </div>
   );
 };

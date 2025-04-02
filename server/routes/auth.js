@@ -28,7 +28,7 @@ router.post('/register', async (req, res) => {
 
 // Login
 router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, isAdmin } = req.body; // ⬅️ We'll use isAdmin from frontend
   try {
     let user = await User.findOne({ email });
     if (!user) return res.status(400).json({ msg: 'Invalid credentials' });
@@ -36,7 +36,12 @@ router.post('/login', async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ msg: 'Invalid credentials' });
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+    // ✅ ADMIN ROLE CHECK
+    if (isAdmin && user.role !== "admin") {
+      return res.status(403).json({ msg: "Access denied. Not an admin." });
+    }
+
+    const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, {
       expiresIn: '1d'
     });
 
@@ -51,12 +56,15 @@ router.post('/login', async (req, res) => {
         address: user.address || "",
         city: user.city || "",
         image: user.image || "",
+        role: user.role || "",
       }
     });
   } catch (err) {
+    console.error(err);
     res.status(500).send('Server error');
   }
 });
+
 
 
 // Update Profile
