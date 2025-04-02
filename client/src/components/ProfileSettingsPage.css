@@ -1,15 +1,14 @@
-/* Profile Page Container */
+/* ==================== Layout Container ==================== */
 .profile-settings-page {
   display: flex;
   padding: 60px 40px;
   background-color: #f9f9f9;
   font-family: 'Josefin Slab', serif;
   min-height: 100vh;
-  margin-top: 90px;
-  /* Extra spacing below navbar */
+  margin-top: 90px; /* extra spacing below navbar */
 }
 
-/* Sidebar */
+/* ==================== Sidebar ==================== */
 .sidebar {
   flex: 1;
   max-width: 280px;
@@ -19,6 +18,9 @@
   padding: 30px 20px;
   text-align: center;
   margin-right: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .avatar {
@@ -41,42 +43,62 @@
   margin-bottom: 25px;
 }
 
+/* ==================== Sidebar Buttons ==================== */
 .sidebar-btn {
   display: block;
   width: 100%;
-  padding: 10px 14px;
-  margin: 10px 0;
-  border: none;
-  background-color: #fff;
-  border-left: 4px solid transparent;
-  text-align: left;
-  font-size: 14px;
+  padding: 12px 16px;
+  margin: 8px 0;
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid black;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 15px;
+  font-family: 'Josefin Slab', serif;
+  text-align: center;
   cursor: pointer;
-  transition: all 0.3s ease;
-  border-radius: 4px;
+  transition: background 0.3s ease;
 }
 
-.sidebar-btn:hover,
+.sidebar-btn:hover {
+  background-color: #d8563a;
+  color: white;
+}
+
 .sidebar-btn.active {
-  background-color: #ffe5d4;
-  border-left: 4px solid #f46b45;
-  color: #f46b45;
+  background-color: #f46b45;
+  color: white;
+  border: none;
 }
 
-.logout {
-  color: red;
-  border-top: 1px solid #eee;
-  margin-top: 18px;
-  padding-top: 12px;
+/* Logout Button */
+.sidebar-btn.logout {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  margin-top: auto;
+  padding: 12px 16px;
+  font-weight: bold;
+  font-size: 15px;
+  font-family: 'Josefin Slab', serif;
+  border-radius: 6px;
+  transition: background 0.3s ease;
 }
 
-/* Main Form */
+.sidebar-btn.logout:hover {
+  background-color: #c0392b;
+  color: white;
+}
+
+/* ==================== Main Content ==================== */
 .main-content {
   flex: 3;
   background-color: #fff;
   padding: 40px 30px;
   border-radius: 12px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  animation: fadeIn 0.4s ease;
 }
 
 .profile-form h3 {
@@ -146,40 +168,14 @@
   background-color: #e55c35;
 }
 
-
-.main-content {
-  animation: fadeIn 0.4s ease;
-}
-
+/* ==================== Animation ==================== */
 @keyframes fadeIn {
   from {
     opacity: 0;
     transform: translateY(8px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-
-.sidebar-btn {
-  transition: all 0.3s ease;
-}
-
-/* Highlighted active sidebar tab */
-.sidebar-btn.active {
-  background-color: #ffe5d4;
-  border-left: 4px solid #f46b45;
-  color: #f46b45;
-  font-weight: 600;
-}
-
-
-/* Hover styles */
-.sidebar-btn:hover {
-  background-color: #ff9c74;
-  /* lighter orange */
-  color: white;
 }
