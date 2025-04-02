@@ -17,11 +17,15 @@ const OrdersList = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        setOrders(res.data);
+
+        console.log("Fetched Orders Response:", res.data);
+
+        setOrders(Array.isArray(res.data) ? res.data : res.data.orders || []);
       } catch (err) {
         console.error("Error fetching orders:", err);
       }
     };
+
 
     fetchOrders();
   }, []);
