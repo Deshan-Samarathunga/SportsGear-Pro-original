@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import "./ProductsPage.css";
 
 const ProductPage = () => {
@@ -31,32 +32,38 @@ const ProductPage = () => {
 
   return (
     <section className="product-page">
-      <div className="controls">
-        <select
-          className="category-select"
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
-        >
-          {categories.map((cat) => (
-            <option key={cat} value={cat}>
-              {cat}
-            </option>
-          ))}
-        </select>
+      <div className="container">
+        <div className="controls">
+          <select
+            className="category-select"
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
+            {categories.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
 
-        <input
-          type="text"
-          placeholder="Search products..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="search-input"
-        />
+          <input
+            type="text"
+            placeholder="Search products..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="search-input"
+          />
+        </div>
       </div>
 
       <div className="container">
         <div className="grid-3">
           {filteredProducts.map((product) => (
-            <div className="card" key={product._id}>
+            <Link
+              to={`/product/${product._id}`}
+              key={product._id}
+              className="card"
+            >
               <div className="card-img">
                 <img src={product.imageUrl} alt={product.name} />
               </div>
@@ -67,7 +74,7 @@ const ProductPage = () => {
                 <hr />
                 <h3>Rs.{product.price}</h3>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
