@@ -31,13 +31,21 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 
 const ordersRoutes = require("./routes/orders");
-const productsRoutes = require("./routes/products");
-const usersRoutes = require("./routes/users");
-const brandsRoutes = require("./routes/brands");
-const dashboardRoutes = require("./routes/dashboard");
-
 app.use("/api/orders", ordersRoutes);
+
+const productsRoutes = require("./routes/products");
 app.use("/api/products", productsRoutes);
+
+const usersRoutes = require("./routes/users");
 app.use("/api/users", usersRoutes);
+
+const brandsRoutes = require("./routes/brands");
 app.use("/api/brands", brandsRoutes);
+
+const dashboardRoutes = require("./routes/dashboard");
 app.use("/api/dashboard", dashboardRoutes);
+
+
+
+
+

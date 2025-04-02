@@ -1,29 +1,33 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./ProductsPage.css";
-import sampleData from "../data/products.json";
 
 const ProductPage = () => {
-  const [vehicles, setVehicles] = useState([]);
-  const [filteredVehicles, setFilteredVehicles] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   useEffect(() => {
-    setVehicles(sampleData);
-    setFilteredVehicles(sampleData);
+    axios.get("http://localhost:5000/api/products")
+      .then((res) => {
+        setProducts(res.data);
+        setFilteredProducts(res.data);
+      })
+      .catch((err) => console.error("Failed to fetch products:", err));
   }, []);
 
   useEffect(() => {
-    let filtered = vehicles.filter((vehicle) => {
+    const filtered = products.filter((product) => {
       return (
-        vehicle.vehicle_title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-        (selectedCategory === "All" || vehicle.vehicle_brand === selectedCategory)
+        product.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        (selectedCategory === "All" || product.category === selectedCategory)
       );
     });
-    setFilteredVehicles(filtered);
-  }, [searchTerm, selectedCategory, vehicles]);
+    setFilteredProducts(filtered);
+  }, [searchTerm, selectedCategory, products]);
 
-  const categories = ["All", ...new Set(sampleData.map((item) => item.vehicle_brand))];
+  const categories = ["All", ...new Set(products.map((item) => item.category))];
 
   return (
     <section className="product-page">
@@ -33,50 +37,35 @@ const ProductPage = () => {
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
         >
-          {categories.map((brand) => (
-            <option key={brand} value={brand}>
-              {brand}
+          {categories.map((cat) => (
+            <option key={cat} value={cat}>
+              {cat}
             </option>
           ))}
         </select>
 
         <input
           type="text"
-          placeholder="Search cars..."
+          placeholder="Search products..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="search-input"
         />
       </div>
 
-
       <div className="container">
         <div className="grid-3">
-          {filteredVehicles.map((vehicle) => (
-            <div className="card" key={vehicle.vehicle_id}>
+          {filteredProducts.map((product) => (
+            <div className="card" key={product._id}>
               <div className="card-img">
-                <div className="card-tag">
-                  <span>{vehicle.vehicle_brand}</span>
-                </div>
-                <img src={vehicle.vImg1} alt={vehicle.vehicle_title} />
+                <img src={product.imageUrl} alt={product.name} />
               </div>
               <div className="card-body">
-                <div className="row">
-                  <h4>{vehicle.vehicle_title}</h4>
-                  <h5>{vehicle.year}</h5>
-                </div>
-                <div className="row">
-                  <p><i className="ri-group-line"></i> {vehicle.capacity}</p>
-                  <p><i className="ri-gas-station-line"></i> {vehicle.fuel_type}</p>
-                </div>
-                <div className="row">
-                  <p><i className="ri-car-line"></i> {vehicle.year}</p>
-                  <p><i className="ri-steering-2-fill"></i> {vehicle.transmission}</p>
-                </div>
+                <h4>{product.name}</h4>
+                <p>Category: {product.category}</p>
+                <p>Available: {product.quantity}</p>
                 <hr />
-                <div className="row between">
-                  <h3>Rs.{vehicle.price} <span>/ Day</span></h3>
-                </div>
+                <h3>Rs.{product.price}</h3>
               </div>
             </div>
           ))}
