@@ -1,0 +1,152 @@
+.single-product-page {
+    margin-top: 80px;
+    padding: 80px 40px 60px;/* ⬅️ Increased top padding for navbar spacing */
+    background-color: #f9f9f9;
+}
+
+/* ⬆ Top section with image + booking card side by side */
+.top-section {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* 🖼 Fixed size image container */
+.main-image {
+    width: 500px;
+    height: 500px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff; /* optional: gives clean background for images with transparency */
+  }
+
+  .main-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* ⬅️ changed from contain to cover to fill container */
+  }
+
+/* 🧾 Product details box */
+.booking-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 320px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.booking-card h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.booking-card .category {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.booking-card .price {
+    font-size: 22px;
+    font-weight: 600;
+    color: #f46b45;
+    margin-bottom: 20px;
+}
+
+.qty-control {
+    margin-bottom: 20px;
+}
+
+.qty-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.qty-buttons button {
+    padding: 6px 12px;
+    background: #eee;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.qty-buttons span {
+    font-size: 16px;
+    min-width: 24px;
+    text-align: center;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.book-btn,
+.cart-btn {
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.book-btn {
+    background-color: #f46b45;
+    color: white;
+}
+
+.book-btn:hover {
+    background-color: #d85330;
+}
+
+.cart-btn {
+    background-color: #333;
+    color: white;
+}
+
+.cart-btn:hover {
+    background-color: #000;
+}
+
+.stock {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #555;
+}
+
+/* 📄 Product description section below */
+.product-description {
+    max-width: 1000px;
+    margin: 50px auto 0;
+    padding: 25px 30px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.product-description h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.product-description p {
+    color: #444;
+    line-height: 1.7;
+    font-size: 15px;
+}

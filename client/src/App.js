@@ -32,6 +32,8 @@ import OrdersList from "./components/OrdersList";
 
 import AdminRoutes from "./admin/AdminRoutes";
 
+import SingleProduct from "./components/SingleProduct";
+
 // 👇 Create a wrapper for hiding navbar
 //location.pathname.startsWith("/admin")
 //If true → hides the navbar in admin dashboard
@@ -64,6 +66,7 @@ function App() {
           <Route path="/about" element={<AboutUsPage />} />
           <Route path="/orders" element={<OrdersList />} />
           <Route path="/admin/*" element={<AdminRoutes />} />
+          <Route path="/product/:id" element={<SingleProduct />} />
         </Routes>
       </Layout>
     </Router>
