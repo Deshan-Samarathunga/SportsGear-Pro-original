@@ -11,34 +11,34 @@ const SidebarMenu = ({ user }) => {
       <img
         src={user?.image ? `http://localhost:5000${user.image}` : "/profile.png"}
         alt="profile"
-        className="preview-img"
+        className="avatar"
       />
       <h4>{user?.name || "User Name"}</h4>
       <p>{user?.email}</p>
 
       <button
-        className={`btn sidebar-btn ${location.pathname === "/profile" ? "active" : ""}`}
+        className={`sidebar-btn ${location.pathname === "/profile" ? "active" : ""}`}
         onClick={() => navigate("/profile")}
       >
         Profile Setting
       </button>
 
       <button
-        className={`btn sidebar-btn ${location.pathname === "/change-password" ? "active" : ""}`}
+        className={`sidebar-btn ${location.pathname === "/change-password" ? "active" : ""}`}
         onClick={() => navigate("/change-password")}
       >
         Change Password
       </button>
 
       <button
-        className={`btn sidebar-btn ${location.pathname === "/orders" ? "active" : ""}`}
+        className={`sidebar-btn ${location.pathname === "/orders" ? "active" : ""}`}
         onClick={() => navigate("/orders")}
       >
         My Orders
       </button>
-
+      
       <button
-        className="btn sidebar-btn logout"
+        className="sidebar-btn logout"
         onClick={() => {
           localStorage.clear();
           navigate("/signin");

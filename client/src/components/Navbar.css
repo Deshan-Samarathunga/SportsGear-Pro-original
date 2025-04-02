@@ -98,25 +98,11 @@
   opacity: 0.7;
 }
 
-.profile-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-}
-
 .navbar-nav .nav-link.active {
   color: #fff !important;
   font-weight: 600;
   border-bottom: 2px solid #fff;
 }
-
-.profile-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
 
 .profile-icon {
   width: 32px;
@@ -164,6 +150,14 @@
   font-size: 0.95rem;
 }
 
+.profile-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  position: relative;
+}
+
 .profile-trigger {
   display: flex;
   align-items: center;
@@ -174,11 +168,6 @@
 }
 
 .profile-name {
-  margin-top: 2px; /* optional small adjustment */
-}
-
-
-.profile-name {
   margin: 0;
   font-weight: 600;
   font-size: 1.6rem; /* Match the navbar font-size */
@@ -186,4 +175,64 @@
   color: #fff;
   line-height: 1.2;
   font-family: 'Poppins', sans-serif;
+  margin-top: 2px; /* optional small adjustment */
+}
+
+.profile-name-text {
+  white-space: nowrap;         /* Prevents line break */
+  max-width: 200px;            /* Optional: limits width */
+  overflow: hidden;
+  text-overflow: ellipsis;     /* Optional: adds "..." if name is too long */
+  display: inline-block;
+  vertical-align: middle;
+}
+
+
+
+
+.profile-dropdown a {
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  margin: 8px 0;
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid black;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 15px;
+  font-family: 'Josefin Slab', serif;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  text-decoration: none;
+}
+
+.profile-dropdown a:hover {
+  background-color: #f46b45;
+  color: white;
+  border: none;
+}
+
+.dropdown-link {
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  margin: 8px 0;
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid black;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 15px;
+  font-family: 'Josefin Slab', serif;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.dropdown-link:hover {
+  background-color: #f46b45;
+  color: white;
+  border: none;
 }
