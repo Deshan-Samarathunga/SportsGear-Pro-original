@@ -8,8 +8,12 @@ const userSchema = new mongoose.Schema({
   dob: { type: String, default: "" },
   address: { type: String, default: "" },
   city: { type: String, default: "" },
-  image: { type: String, default: "" }
-
+  image: { type: String, default: "" },
+  role: {
+    type: String,
+    enum: ["user", "admin"],
+    default: "user"
+  }
 });
 
 module.exports = mongoose.model('User', userSchema);

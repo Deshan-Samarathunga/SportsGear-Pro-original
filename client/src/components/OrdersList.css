@@ -1,0 +1,18 @@
+.orders-page {
+    padding: 40px;
+    font-family: 'Josefin Slab', serif;
+  }
+  
+  .orders-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .order-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    background-color: #fff;
+  }
+  
