@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FaTrash } from 'react-icons/fa';
 import Sidebar from '../components/Sidebar';
-import Topbar from '../components/Topbar';
 import '../admin.css';
 
 const Users = () => {
@@ -18,13 +17,12 @@ const Users = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log("✅ API response:", res.data); // ✅ Add this
+      console.log("✅ API response:", res.data);
       setUsers(res.data);
     } catch (err) {
       console.error('❌ Error fetching users:', err.response?.data || err.message);
     }
   };
-  
 
   useEffect(() => {
     fetchUsers();
@@ -33,7 +31,7 @@ const Users = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this user?')) {
       try {
-        const token = localStorage.getItem('adminToken'); // ✅ Again for delete
+        const token = localStorage.getItem('adminToken');
         await axios.delete(`http://localhost:5000/api/users/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -55,7 +53,6 @@ const Users = () => {
     <div className="admin-layout">
       <Sidebar />
       <div className="admin-main">
-        <Topbar />
         <div className="admin-content">
           <h2 className="page-title">Registered Users</h2>
           <input
@@ -90,9 +87,10 @@ const Users = () => {
                     <td>
                       {user.image ? (
                         <img
-                          src={user.image}
+                          src={`http://localhost:5000${user.image}`}
                           alt="avatar"
                           style={{ width: '40px', height: '40px', borderRadius: '50%' }}
+                          onError={(e) => { e.target.src = "/profile.png"; }}
                         />
                       ) : (
                         'N/A'

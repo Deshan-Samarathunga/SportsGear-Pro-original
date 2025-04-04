@@ -2,8 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "../components/Sidebar";
-import Topbar from "../components/Topbar";
-import "../admin.css"; // Ensure this contains layout styling (like flex)
+import "../admin.css";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -50,38 +49,23 @@ const Orders = () => {
     }
   };
 
-  const statusBadge = (status) => {
-    switch (status) {
-      case "pending":
-        return <span className="badge bg-warning text-dark">Pending</span>;
-      case "processing":
-        return <span className="badge bg-success">Processing</span>;
-      case "unsuccessful":
-        return <span className="badge bg-danger">Unsuccessful</span>;
-      default:
-        return <span className="badge bg-secondary">Unknown</span>;
-    }
-  };
-
   return (
-    <div className="admin-container d-flex">
+    <div className="admin-layout">
       <Sidebar />
-
-      <div className="admin-content flex-grow-1">
-        <Topbar />
-        <div className="p-4">
-          <h3>All Orders</h3>
+      <div className="admin-main">
+        <div className="admin-content">
+          <h2 className="page-title">All Orders</h2>
           {orders.length === 0 ? (
             <p>No orders found.</p>
           ) : (
-            <div className="table-responsive mt-3">
-              <table className="table table-bordered table-hover">
-                <thead className="table-dark">
+            <div className="user-table">
+              <table>
+                <thead>
                   <tr>
                     <th>User ID</th>
-                    <th>Product</th>
+                    <th>Item</th>
                     <th>Qty</th>
-                    <th>Price</th>
+                    <th>Total</th>
                     <th>Status</th>
                     <th>Action</th>
                     <th>Date</th>
@@ -94,21 +78,34 @@ const Orders = () => {
                       <td>{o.name}</td>
                       <td>{o.quantity}</td>
                       <td>Rs.{o.price * o.quantity}</td>
-                      <td>{statusBadge(o.status)}</td>
+                      <td>
+                        <span className={`badge ${
+                          o.status === "pending"
+                            ? "bg-warning text-dark"
+                            : o.status === "processing"
+                            ? "bg-success"
+                            : o.status === "unsuccessful"
+                            ? "bg-danger"
+                            : "bg-secondary"
+                        }`}>
+                          {o.status.charAt(0).toUpperCase() + o.status.slice(1)}
+                        </span>
+                      </td>
                       <td>
                         {o.status === "pending" ? (
                           <>
                             <button
-                              className="btn btn-sm btn-success me-2"
                               onClick={() =>
                                 updateStatus(o._id, "processing", o.productId, o.quantity)
                               }
+                              className="text-green-600 hover:underline"
                             >
                               Accept
                             </button>
+                            <span> | </span>
                             <button
-                              className="btn btn-sm btn-danger"
                               onClick={() => updateStatus(o._id, "unsuccessful")}
+                              className="text-red-600 hover:underline"
                             >
                               Reject
                             </button>

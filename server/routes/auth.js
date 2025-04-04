@@ -1,3 +1,4 @@
+// server/routes/auth.js
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -43,9 +44,12 @@ router.post('/login', async (req, res) => {
       return res.status(403).json({ msg: "Access denied. Not an admin." });
     }
 
-    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "30d",
-    });
+    const token = jwt.sign(
+      { _id: user._id, role: user.role },  // ⬅️ include role here
+      process.env.JWT_SECRET,
+      { expiresIn: "30d" }
+    );
+
 
     res.json({
       token,
