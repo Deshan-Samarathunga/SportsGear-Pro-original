@@ -1,3 +1,4 @@
+// client/src/admin/pages/Users.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FaTrash } from 'react-icons/fa';
@@ -11,17 +12,19 @@ const Users = () => {
 
   const fetchUsers = async () => {
     try {
-      const token = localStorage.getItem('adminToken'); // ✅ Get token
+      const token = localStorage.getItem("adminToken");
       const res = await axios.get('http://localhost:5000/api/users', {
         headers: {
-          Authorization: `Bearer ${token}`, // ✅ Send it
+          Authorization: `Bearer ${token}`,
         },
       });
+      console.log("✅ API response:", res.data); // ✅ Add this
       setUsers(res.data);
     } catch (err) {
-      console.error('Error fetching users:', err);
+      console.error('❌ Error fetching users:', err.response?.data || err.message);
     }
   };
+  
 
   useEffect(() => {
     fetchUsers();

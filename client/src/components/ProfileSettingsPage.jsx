@@ -3,7 +3,7 @@ import "./ProfileSettingsPage.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import SidebarMenu from "./SidebarMenu";
-
+import { useAuth } from "../context/AuthContext";
 
 const ProfileSettingsPage = () => {
   const [profile, setProfile] = useState({
@@ -18,22 +18,22 @@ const ProfileSettingsPage = () => {
   });
 
   const navigate = useNavigate();
+  const { user, updateUser } = useAuth();
 
   useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem("user"));
-    if (userData) {
+    if (user) {
       setProfile((prev) => ({
         ...prev,
-        name: userData.name || "",
-        email: userData.email || "",
-        phone: userData.phone || "",
-        dob: userData.dob || "",
-        address: userData.address || "",
-        city: userData.city || "",
-        imageUrl: userData.image || "", // preload image
+        name: user.name || "",
+        email: user.email || "",
+        phone: user.phone || "",
+        dob: user.dob || "",
+        address: user.address || "",
+        city: user.city || "",
+        imageUrl: user.image || "", // preload image
       }));
     }
-  }, []);
+  }, [user]);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -54,6 +54,7 @@ const ProfileSettingsPage = () => {
       const token = localStorage.getItem("token");
       let uploadedImageUrl = profile.imageUrl;
 
+      // upload image first if selected
       if (profile.image) {
         const formData = new FormData();
         formData.append("image", profile.image);
@@ -72,7 +73,8 @@ const ProfileSettingsPage = () => {
         uploadedImageUrl = uploadRes.data.url;
       }
 
-      const response = await axios.put(
+      // update user profile
+      await axios.put(
         "http://localhost:5000/api/auth/update",
         {
           name: profile.name,
@@ -89,26 +91,22 @@ const ProfileSettingsPage = () => {
         }
       );
 
-
-      const updatedUser = {
-        ...JSON.parse(localStorage.getItem("user")),
+      // update context and localStorage
+      updateUser({ 
+        name: profile.name,
+        phone: profile.phone,
+        dob: profile.dob,
+        address: profile.address,
+        city: profile.city,
         image: uploadedImageUrl,
-      };
-
-      localStorage.setItem("user", JSON.stringify(updatedUser));
-      setProfile((prev) => ({ ...prev, imageUrl: uploadedImageUrl }));
+      });
 
       alert("Profile updated successfully!");
-
-      // Update imageUrl in UI
-      setProfile((prev) => ({ ...prev, imageUrl: uploadedImageUrl }));
     } catch (error) {
       console.error("Profile update failed", error);
       alert("Failed to update profile");
     }
   };
-
-  const user = JSON.parse(localStorage.getItem("user"));
 
   return (
     <div className="profile-settings-page">
@@ -126,7 +124,6 @@ const ProfileSettingsPage = () => {
               alt="profile"
               className="preview-img"
             />
-
             <input
               type="file"
               name="image"
