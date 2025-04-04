@@ -1,13 +1,17 @@
+// client/src/components/Navbar.jsx
 import React, { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/logo/2wide white logo.png";
 import { AuthContext } from '../context/AuthContext';
 import ProfileDropdown from "./ProfileDropdown";
+import { useCart } from "../context/CartContext";
+import { FaShoppingCart } from "react-icons/fa";
 
 const Navbar = () => {
   const location = useLocation();
   const isHome = location.pathname === "/";
   const { user } = useContext(AuthContext);
+  const { cartCount } = useCart();
 
   const navItems = [
     { label: "Home", to: "/" },
@@ -44,7 +48,7 @@ const Navbar = () => {
         </button>
 
         <div className="collapse navbar-collapse" id="navmenu">
-          <ul className="navbar-nav ms-auto">
+          <ul className="navbar-nav ms-auto align-items-center">
             {navItems.map((item, index) => (
               <React.Fragment key={item.label}>
                 <li className="nav-item">
@@ -59,6 +63,20 @@ const Navbar = () => {
               </React.Fragment>
             ))}
 
+            {/* Cart Icon */}
+            <li className="nav-separator">|</li>
+            <li className="nav-item position-relative">
+              <Link to="/cart" className="nav-link position-relative">
+                <FaShoppingCart size={20} />
+                {cartCount > 0 && (
+                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {cartCount}
+                  </span>
+                )}
+              </Link>
+            </li>
+
+            {/* Auth Links */}
             {!user ? (
               <>
                 <li className="nav-separator">|</li>

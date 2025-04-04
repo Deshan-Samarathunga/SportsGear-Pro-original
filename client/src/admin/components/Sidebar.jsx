@@ -20,7 +20,6 @@ const Sidebar = () => {
           <li><NavLink to="/admin/users"><FaUsers /> Users</NavLink></li>
           <li><NavLink to="/admin/products"><FaBoxOpen /> Products</NavLink></li>
           <li><NavLink to="/admin/orders"><FaClipboardList /> Orders</NavLink></li>
-          <li><NavLink to="/admin/brands"><FaTags /> Brands</NavLink></li>
           <li><NavLink to="/admin/profile"><FaUserCircle /> Profile</NavLink></li>
         </ul>
       </div>

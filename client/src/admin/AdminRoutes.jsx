@@ -1,10 +1,10 @@
+// client/src/admin/AdminRoutes.jsx
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import AdminLogin from "./pages/AdminLogin";
 import Dashboard from "./pages/Dashboard";
 import Users from "./pages/Users";
 import Orders from "./pages/Orders";
-import Brands from "./pages/Brands";
 import Profile from "./pages/Profile";
 import ProductsList from "./pages/ProductsList";
 import ProductsAdd from "./pages/ProductsAdd";
@@ -66,15 +66,6 @@ const AdminRoutes = () => {
         element={
           <AdminProtectedRoute>
             <Orders />
-          </AdminProtectedRoute>
-        }
-      />
-
-      <Route
-        path="brands"
-        element={
-          <AdminProtectedRoute>
-            <Brands />
           </AdminProtectedRoute>
         }
       />

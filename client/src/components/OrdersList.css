@@ -1,3 +1,4 @@
+/*client/src/components/OrdersList.css*/
 .orders-page {
     padding: 40px;
     font-family: 'Josefin Slab', serif;
@@ -14,5 +15,25 @@
     padding: 16px;
     margin-bottom: 16px;
     background-color: #fff;
+  }
+  
+  .refund-message {
+    font-weight: 600;
+    color: #dc3545;
+    background-color: #ffecec;
+    padding: 10px 14px;
+    border-left: 4px solid #dc3545;
+    border-radius: 4px;
+    margin: 8px 0;
+  }
+  
+  .processing-message {
+    font-weight: 600;
+    color: #155724;
+    background-color: #d4edda;
+    padding: 10px 14px;
+    border-left: 4px solid #28a745;
+    border-radius: 4px;
+    margin: 8px 0;
   }
   

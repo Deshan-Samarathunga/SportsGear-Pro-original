@@ -8,7 +8,9 @@ const multer = require('multer');
 const path = require('path');
 require('dotenv').config();
 
+// ===========================
 // Register
+// ===========================
 router.post('/register', async (req, res) => {
   const { name, email, password } = req.body;
   try {
@@ -16,7 +18,6 @@ router.post('/register', async (req, res) => {
     if (user) return res.status(400).json({ msg: 'User already exists' });
 
     const hashedPassword = await bcrypt.hash(password, 10);
-
     user = new User({ name, email, password: hashedPassword });
     await user.save();
 
@@ -26,9 +27,11 @@ router.post('/register', async (req, res) => {
   }
 });
 
+// ===========================
 // Login
+// ===========================
 router.post('/login', async (req, res) => {
-  const { email, password, isAdmin } = req.body; // ⬅️ We'll use isAdmin from frontend
+  const { email, password, isAdmin } = req.body;
   try {
     let user = await User.findOne({ email });
     if (!user) return res.status(400).json({ msg: 'Invalid credentials' });
@@ -36,13 +39,12 @@ router.post('/login', async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ msg: 'Invalid credentials' });
 
-    // ✅ ADMIN ROLE CHECK
     if (isAdmin && user.role !== "admin") {
       return res.status(403).json({ msg: "Access denied. Not an admin." });
     }
 
-    const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, {
-      expiresIn: '1d'
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "30d",
     });
 
     res.json({
@@ -65,16 +67,16 @@ router.post('/login', async (req, res) => {
   }
 });
 
-
-
-// Update Profile
+// ===========================
+// Update Profile (uses authMiddleware)
+// ===========================
 router.put('/update', async (req, res) => {
   try {
     const token = req.headers.authorization?.split(" ")[1];
     if (!token) return res.status(401).json({ msg: "No token, authorization denied" });
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const userId = decoded.id || decoded.userId;
+    const userId = decoded._id; // ✅ FIXED
 
     const updatedUser = await User.findByIdAndUpdate(
       userId,
@@ -104,13 +106,15 @@ router.put('/update', async (req, res) => {
       }
     });
   } catch (err) {
-    console.error("Update error:", err.message);
+    console.error("Update error:", err.message); // Log to terminal for debug
     res.status(500).json({ msg: "Server error while updating profile" });
   }
 });
 
 
-// Storage config
+// ===========================
+// Image Upload
+// ===========================
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, path.join(__dirname, '../public/uploads'));
@@ -120,10 +124,8 @@ const storage = multer.diskStorage({
     cb(null, uniqueName);
   }
 });
-
 const upload = multer({ storage });
 
-// Image upload route
 router.post('/upload-profile-pic', upload.single('image'), (req, res) => {
   try {
     const imageUrl = `/uploads/${req.file.filename}`;
@@ -134,14 +136,16 @@ router.post('/upload-profile-pic', upload.single('image'), (req, res) => {
   }
 });
 
+// ===========================
 // Change Password
+// ===========================
 router.put('/change-password', async (req, res) => {
   try {
     const token = req.headers.authorization?.split(" ")[1];
     if (!token) return res.status(401).json({ msg: "Unauthorized" });
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const userId = decoded.id;
+    const userId = decoded._id;
 
     const user = await User.findById(userId);
     if (!user) return res.status(404).json({ msg: "User not found" });

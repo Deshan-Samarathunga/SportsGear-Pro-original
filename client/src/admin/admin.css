@@ -1,3 +1,5 @@
+/*client/src/admin/pages/admin.css*/
+
 /* ===== Base Layout ===== */
 .admin-layout {
   display: flex;
@@ -297,4 +299,21 @@
   font-size: 1rem;
   margin-bottom: 20px;
   width: 300px;
+}
+
+/* admin.css */
+.admin-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #f8f9fa;
+  padding: 20px;
+}
+
+.admin-content {
+  flex-grow: 1;
+  background-color: #fff;
 }

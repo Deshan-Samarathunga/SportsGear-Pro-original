@@ -1,3 +1,5 @@
+// client/src/components/SignInPage.jsx
+
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
@@ -22,14 +24,13 @@ const SignInPage = () => {
     e.preventDefault();
     try {
       const res = await axios.post("http://localhost:5000/api/auth/login", form);
-      
+
       alert("Login successful!");
       localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
+      localStorage.setItem("user", JSON.stringify({ ...res.data.user, token: res.data.token }));
 
-
-      login(res.data.user);     // ✅ update context
-      navigate("/");            // ✅ go to home page
+      login(res.data.user, res.data.token); // ✅ pass token
+      navigate("/");
 
     } catch (err) {
       alert(err?.response?.data?.msg || "Login failed");

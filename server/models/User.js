@@ -1,4 +1,14 @@
+// server/models/User.js
 const mongoose = require('mongoose');
+
+// Cart item schema (embedded)
+const cartItemSchema = new mongoose.Schema({
+  productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
+  name: { type: String, required: true },
+  price: { type: Number, required: true },
+  quantity: { type: Number, required: true },
+  imageUrl: { type: String, required: true }
+});
 
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -13,7 +23,8 @@ const userSchema = new mongoose.Schema({
     type: String,
     enum: ["user", "admin"],
     default: "user"
-  }
+  },
+  cart: [cartItemSchema] 
 });
 
 module.exports = mongoose.model('User', userSchema);

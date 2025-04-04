@@ -1,12 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+// client/src/components/SingleProduct.jsx
+import React, { useEffect, useState, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./SingleProduct.css";
+import { useCart } from "../context/CartContext";
+import { AuthContext } from "../context/AuthContext";
 
 const SingleProduct = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const { addToCart } = useCart();
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     axios
@@ -26,10 +32,26 @@ const SingleProduct = () => {
   };
 
   const handleBuyNow = () => {
-    alert(`You chose to buy ${quantity} x ${product.name}`);
+    if (!user) {
+      alert("Please sign in to proceed with the purchase.");
+      navigate("/signin");
+      return;
+    }
+
+    const orderData = {
+      productId: product._id,
+      name: product.name,
+      price: product.price,
+      quantity,
+      imageUrl: product.imageUrl,
+    };
+
+    localStorage.setItem("checkoutOrder", JSON.stringify(orderData));
+    navigate("/checkout");
   };
 
   const handleAddToCart = () => {
+    addToCart({ ...product, quantity });
     alert(`${quantity} x ${product.name} added to cart.`);
   };
 
@@ -37,7 +59,7 @@ const SingleProduct = () => {
 
   return (
     <div className="single-product-page">
-      {/* Top section: image and booking side-by-side */}
+      {/* Top Section: Image and Booking Side by Side */}
       <div className="top-section">
         <div className="main-image">
           <img src={product.imageUrl} alt={product.name} />
@@ -46,7 +68,7 @@ const SingleProduct = () => {
         <div className="booking-card">
           <h2>{product.name}</h2>
           <p className="category">Category: {product.category}</p>
-          <p className="price">Rs.{product.price}</p>
+          <p className="price">Rs.{product.price.toLocaleString()}</p>
 
           <div className="qty-control">
             <label>Quantity:</label>
@@ -70,9 +92,9 @@ const SingleProduct = () => {
         </div>
       </div>
 
-      {/* Description section below */}
+      {/* Product Description Section */}
       <div className="product-description">
-        <h3>Product details</h3>
+        <h3>Product Details</h3>
         <p>{product.description || "No description available."}</p>
       </div>
     </div>

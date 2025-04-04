@@ -1,3 +1,4 @@
+// client/src/App.js
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
@@ -34,6 +35,12 @@ import AdminRoutes from "./admin/AdminRoutes";
 
 import SingleProduct from "./components/SingleProduct";
 
+import CartPage from "./components/CartPage";
+
+import PaymentPage from "./components/PaymentPage";
+
+import CheckoutPage from "./components/CheckoutPage";
+
 // 👇 Create a wrapper for hiding navbar
 //location.pathname.startsWith("/admin")
 //If true → hides the navbar in admin dashboard
@@ -67,6 +74,9 @@ function App() {
           <Route path="/orders" element={<OrdersList />} />
           <Route path="/admin/*" element={<AdminRoutes />} />
           <Route path="/product/:id" element={<SingleProduct />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
         </Routes>
       </Layout>
     </Router>

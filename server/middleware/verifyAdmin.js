@@ -1,3 +1,5 @@
+// server/middleware/verifyAdmin.js
+
 const jwt = require("jsonwebtoken");
 
 const verifyAdmin = (req, res, next) => {
