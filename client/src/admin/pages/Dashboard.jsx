@@ -1,7 +1,6 @@
 // client/src/admin/pages/Dashboard.jsx
 import React from "react";
 import Sidebar from "../components/Sidebar";
-import Topbar from "../components/Topbar";
 import StatCard from "../components/StatCard";
 import "../admin.css";
 
@@ -10,7 +9,6 @@ const Dashboard = () => {
     <div className="admin-layout">
       <Sidebar />
       <div className="admin-main">
-        <Topbar />
         <div className="admin-content">
           <h2 className="page-title">Overview</h2>
           <div className="stat-cards">

@@ -5,7 +5,6 @@ import AdminLogin from "./pages/AdminLogin";
 import Dashboard from "./pages/Dashboard";
 import Users from "./pages/Users";
 import Orders from "./pages/Orders";
-import Profile from "./pages/Profile";
 import ProductsList from "./pages/ProductsList";
 import ProductsAdd from "./pages/ProductsAdd";
 import AdminProtectedRoute from "./components/AdminProtectedRoute";
@@ -66,15 +65,6 @@ const AdminRoutes = () => {
         element={
           <AdminProtectedRoute>
             <Orders />
-          </AdminProtectedRoute>
-        }
-      />
-
-      <Route
-        path="profile"
-        element={
-          <AdminProtectedRoute>
-            <Profile />
           </AdminProtectedRoute>
         }
       />

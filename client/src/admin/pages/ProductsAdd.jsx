@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
-import Topbar from "../components/Topbar";
 import "../admin.css";
 
 const ProductsAdd = () => {
@@ -66,7 +65,6 @@ const ProductsAdd = () => {
       <div className="admin-layout">
         <Sidebar />
         <div className="admin-main">
-          <Topbar />
           <div className="admin-content">Loading product...</div>
         </div>
       </div>
@@ -77,64 +75,105 @@ const ProductsAdd = () => {
     <div className="admin-layout">
       <Sidebar />
       <div className="admin-main">
-        <Topbar />
         <div className="admin-content">
           <div className="form-container bg-white shadow-md rounded-lg p-6 max-w-3xl mx-auto">
             <h2 className="text-xl font-semibold mb-6">
               {isEditMode ? "Edit Product" : "Add New Product"}
             </h2>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
-              {[ 
-                { label: "Name", name: "name", type: "text", placeholder: "Product Name" },
-                { label: "Category", name: "category", type: "text", placeholder: "e.g. Football" },
-                { label: "Price", name: "price", type: "number", placeholder: "e.g. 2500" },
-                { label: "Quantity", name: "quantity", type: "number", placeholder: "e.g. 5" },
-                { label: "Image URL", name: "imageUrl", type: "text", placeholder: "https://example.com/image.jpg" }
-              ].map((field) => (
-                <div key={field.name}>
-                  <label className="block font-medium mb-1">{field.label}:</label>
+            <form onSubmit={handleSubmit} className="admin-form">
+              {/* Name */}
+              <div className="form-group">
+                <label>Name:</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="Product Name"
+                  required
+                />
+              </div>
+
+              {/* Category */}
+              <div className="form-group">
+                <label>Category:</label>
+                <input
+                  type="text"
+                  name="category"
+                  value={formData.category}
+                  onChange={handleChange}
+                  placeholder="e.g. Football"
+                  required
+                />
+              </div>
+
+              {/* Price & Quantity side by side */}
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Price:</label>
                   <input
-                    type={field.type}
-                    name={field.name}
-                    value={formData[field.name]}
+                    type="number"
+                    name="price"
+                    value={formData.price}
                     onChange={handleChange}
-                    placeholder={field.placeholder}
-                    className="w-full border border-gray-300 px-4 py-2 rounded bg-gray-50"
-                    required={field.name !== "imageUrl"}
+                    placeholder="e.g. 2500"
+                    required
                   />
                 </div>
-              ))}
 
-              {/* New field: Description */}
-              <div>
-                <label className="block font-medium mb-1">Description:</label>
+                <div className="form-group">
+                  <label>Quantity:</label>
+                  <input
+                    type="number"
+                    name="quantity"
+                    value={formData.quantity}
+                    onChange={handleChange}
+                    placeholder="e.g. 5"
+                    required
+                  />
+                </div>
+              </div>
+
+              {/* Image URL */}
+              <div className="form-group">
+                <label>Image URL:</label>
+                <input
+                  type="text"
+                  name="imageUrl"
+                  value={formData.imageUrl}
+                  onChange={handleChange}
+                  placeholder="https://example.com/image.jpg"
+                />
+              </div>
+
+              {/* Description */}
+              <div className="form-group">
+                <label>Description:</label>
                 <textarea
                   name="description"
                   value={formData.description}
                   onChange={handleChange}
                   placeholder="Enter product description..."
-                  className="w-full border border-gray-300 px-4 py-2 rounded bg-gray-50"
                   rows={4}
                 />
               </div>
 
-              <div className="flex justify-end gap-3 pt-4">
+              {/* Buttons */}
+              <div className="btn-group">
                 <button
                   type="button"
                   onClick={() => navigate("/admin/products")}
-                  className="bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded transition"
+                  className="admin-btn"
                 >
                   Back to List
                 </button>
-                <button
-                  type="submit"
-                  className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded transition"
-                >
+                <button type="submit" className="admin-btn">
                   {isEditMode ? "Update Product" : "Add Product"}
                 </button>
               </div>
             </form>
+
           </div>
         </div>
       </div>

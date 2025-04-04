@@ -1,6 +1,7 @@
+// client/src/admin/components/Sidebar.jsx
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { FaTachometerAlt, FaUsers, FaBoxOpen, FaClipboardList, FaTags, FaUserCircle, FaSignOutAlt } from "react-icons/fa";
+import { FaTachometerAlt, FaUsers, FaBoxOpen, FaClipboardList, FaSignOutAlt } from "react-icons/fa";
 import "../admin.css";
 
 const Sidebar = () => {
@@ -20,7 +21,6 @@ const Sidebar = () => {
           <li><NavLink to="/admin/users"><FaUsers /> Users</NavLink></li>
           <li><NavLink to="/admin/products"><FaBoxOpen /> Products</NavLink></li>
           <li><NavLink to="/admin/orders"><FaClipboardList /> Orders</NavLink></li>
-          <li><NavLink to="/admin/profile"><FaUserCircle /> Profile</NavLink></li>
         </ul>
       </div>
 

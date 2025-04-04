@@ -8,9 +8,12 @@ const verifyAdmin = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    // Fix: Make sure role is encoded in token during login
     if (decoded.role !== "admin") {
       return res.status(403).json({ message: "Admin access required" });
     }
+
     req.user = decoded;
     next();
   } catch (err) {

@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
-import Topbar from "../components/Topbar";
 import "../admin.css";
 
 const ProductsList = () => {
@@ -39,16 +38,16 @@ const ProductsList = () => {
     <div className="admin-layout">
       <Sidebar />
       <div className="admin-main">
-        <Topbar />
         <div className="admin-content">
           <div className="flex justify-between items-center mb-4">
             <h2 className="page-title">Products</h2>
             <button
               onClick={() => navigate("/admin/products/add")}
-              className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-4 py-2 rounded-md shadow-sm transition duration-200"
+              className="admin-btn"
             >
               Add New +
             </button>
+
           </div>
 
           <div className="user-table">
