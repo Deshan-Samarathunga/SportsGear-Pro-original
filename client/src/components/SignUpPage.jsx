@@ -14,8 +14,9 @@ const SignUpPage = () => {
     conPassword: "",
     terms: false,
   });
-  const { login } = useContext(AuthContext);
-  const navigate = useNavigate();
+  
+ //const { login } = useContext(AuthContext);
+  //const navigate = useNavigate();
 
   const togglePassword = () => setShowPassword(!showPassword);
 
@@ -48,7 +49,7 @@ const SignUpPage = () => {
       });
   
       alert("Sign up successful!");
-      navigate("/signin"); // ✅ redirect to sign-in page
+      navigate("/signin"); // redirect to sign-in page
     } catch (err) {
       alert(err?.response?.data?.msg || "Registration failed");
     }
