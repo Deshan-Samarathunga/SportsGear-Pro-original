@@ -1,4 +1,3 @@
-// client/src/admin/pages/ProductsList.jsx
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -7,17 +6,14 @@ import "../admin.css";
 
 const ProductsList = () => {
   const [products, setProducts] = useState([]);
+  const [search, setSearch] = useState("");
   const navigate = useNavigate();
 
-  const fetchProducts = () => {
+  useEffect(() => {
     axios
       .get("http://localhost:5000/api/products")
       .then((res) => setProducts(res.data))
       .catch((err) => console.error("Error fetching products:", err));
-  };
-
-  useEffect(() => {
-    fetchProducts();
   }, []);
 
   const handleDelete = async (id) => {
@@ -26,7 +22,7 @@ const ProductsList = () => {
 
     try {
       await axios.delete(`http://localhost:5000/api/products/${id}`);
-      setProducts(products.filter((p) => p._id !== id)); // remove from UI
+      setProducts(products.filter((p) => p._id !== id));
       alert("Product deleted.");
     } catch (err) {
       console.error("Error deleting product:", err);
@@ -34,22 +30,33 @@ const ProductsList = () => {
     }
   };
 
+  const filtered = products.filter(p =>
+    p.name.toLowerCase().includes(search.toLowerCase()) ||
+    p.category.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <div className="admin-layout">
       <Sidebar />
       <div className="admin-main">
         <div className="admin-content">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="page-title">Products</h2>
+          <h2 className="page-title">Products</h2>
+          <div className="search-add-wrapper">
+            <input
+              type="text"
+              placeholder="Search by name or category"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="search-input"
+            />
             <button
               onClick={() => navigate("/admin/products/add")}
               className="admin-btn"
             >
               Add New +
             </button>
-
           </div>
-
+          
           <div className="user-table">
             <table>
               <thead>
@@ -63,39 +70,40 @@ const ProductsList = () => {
                 </tr>
               </thead>
               <tbody>
-                {products.map((p) => (
-                  <tr key={p._id}>
-                    <td>{p.name}</td>
-                    <td>{p.category}</td>
-                    <td>Rs.{p.price}</td>
-                    <td>{p.quantity}</td>
-                    <td>
-                      <img
-                        src={p.imageUrl}
-                        alt={p.name}
-                        className="h-12 w-12 object-cover rounded-full"
-                      />
-                    </td>
-                    <td className="flex gap-4">
-                      <button
-                        onClick={() => navigate(`/admin/products/edit/${p._id}`)}
-                        className="text-blue-500 underline"
-                      >
-                        Edit
-                      </button>
-                      <button
-                        onClick={() => handleDelete(p._id)}
-                        className="text-red-500 underline"
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-                {products.length === 0 && (
+                {filtered.length > 0 ? (
+                  filtered.map((p) => (
+                    <tr key={p._id}>
+                      <td>{p.name}</td>
+                      <td>{p.category}</td>
+                      <td>Rs.{p.price}</td>
+                      <td>{p.quantity}</td>
+                      <td>
+                        <img
+                          src={p.imageUrl}
+                          alt={p.name}
+                          className="h-12 w-12 object-cover rounded-full"
+                        />
+                      </td>
+                      <td className="flex gap-4">
+                        <button
+                          onClick={() => navigate(`/admin/products/edit/${p._id}`)}
+                          className="text-blue-500 underline"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => handleDelete(p._id)}
+                          className="text-red-500 underline"
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
                   <tr>
                     <td colSpan="6" className="text-center py-4">
-                      No products available.
+                      No products found.
                     </td>
                   </tr>
                 )}

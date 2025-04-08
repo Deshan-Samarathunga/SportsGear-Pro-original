@@ -306,8 +306,8 @@
   border-radius: 6px;
   padding: 10px;
   font-size: 1rem;
-  margin-bottom: 20px;
-  width: 300px;
+  width: 280px;
+  min-width: 180px;
 }
 
 .admin-btn {
@@ -377,4 +377,23 @@
 
 .form-row .form-group {
   flex: 1;
+}
+
+
+.top-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.search-add-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
 }
