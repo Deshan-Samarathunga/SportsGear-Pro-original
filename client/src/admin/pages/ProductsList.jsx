@@ -40,7 +40,33 @@ const ProductsList = () => {
       <Sidebar />
       <div className="admin-main">
         <div className="admin-content">
-          <h2 className="page-title">Products</h2>
+          <div className="d-flex justify-content-between align-items-center mb-3">
+            <h2 className="page-title">Products</h2>
+            <div className="d-flex gap-2">
+              <button
+                onClick={() => navigate("/admin/products/add")}
+                className="admin-btn"
+              >
+                Add New +
+              </button>
+              <button
+                onClick={() => navigate("/admin/inventory")}
+                className="admin-btn"
+                style={{
+                  backgroundColor: "#F57C51",
+                  color: "white",
+                  border: "none",
+                  padding: "10px 20px",
+                  borderRadius: "5px",
+                }}
+                onMouseEnter={(e) => (e.target.style.backgroundColor = "#e3683f")}
+                onMouseLeave={(e) => (e.target.style.backgroundColor = "#F57C51")}
+              >
+                Inventory Report
+              </button>
+            </div>
+          </div>
+
           <div className="search-add-wrapper">
             <input
               type="text"
@@ -49,14 +75,8 @@ const ProductsList = () => {
               onChange={(e) => setSearch(e.target.value)}
               className="search-input"
             />
-            <button
-              onClick={() => navigate("/admin/products/add")}
-              className="admin-btn"
-            >
-              Add New +
-            </button>
           </div>
-          
+
           <div className="user-table">
             <table>
               <thead>
