@@ -22,8 +22,10 @@ const CartPage = () => {
   };
 
   const handleCheckout = () => {
-    navigate("/payment"); // ✅ NO localStorage anymore
+    localStorage.removeItem("checkoutOrder");
+    navigate("/payment");
   };
+
 
   const total = cart.reduce((sum, item) => sum + item.quantity * item.price, 0);
 
