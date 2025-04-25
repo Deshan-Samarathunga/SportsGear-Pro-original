@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaRobot, FaTimes, FaPaperPlane } from "react-icons/fa";
 import axios from "axios";
-import "./ChatBot.css";
+import "./style/ChatBot.css";
 
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);

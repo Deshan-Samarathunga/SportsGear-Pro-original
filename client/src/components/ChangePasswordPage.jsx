@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SidebarMenu from "./SidebarMenu";
-import "./ProfileSettingsPage.css"; 
+import "./style/ProfileSettingsPage.css"; 
 import axios from "axios";
 
 const ChangePasswordPage = () => {

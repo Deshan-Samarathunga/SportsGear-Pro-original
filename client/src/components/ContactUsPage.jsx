@@ -1,5 +1,5 @@
 import React from "react";
-import "./ContactUsPage.css";
+import "./style/ContactUsPage.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 

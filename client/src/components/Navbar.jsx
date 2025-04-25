@@ -6,6 +6,7 @@ import { AuthContext } from '../context/AuthContext';
 import ProfileDropdown from "./ProfileDropdown";
 import { useCart } from "../context/CartContext";
 import { FaShoppingCart } from "react-icons/fa";
+import "./style/Navbar.css";
 
 const Navbar = () => {
   const location = useLocation();
@@ -66,7 +67,16 @@ const Navbar = () => {
             {/* Cart Icon */}
             <li className="nav-separator">|</li>
             <li className="nav-item position-relative">
-              <Link to="/cart" className="nav-link position-relative">
+              <Link
+                to={user ? "/cart" : "/signin"}
+                onClick={(e) => {
+                  if (!user) {
+                    e.preventDefault();
+                    alert("Please log in to view your cart.");
+                  }
+                }}
+                className="nav-link position-relative"
+              >
                 <FaShoppingCart size={20} />
                 {cartCount > 0 && (
                   <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -74,6 +84,7 @@ const Navbar = () => {
                   </span>
                 )}
               </Link>
+
             </li>
 
             {/* Auth Links */}

@@ -2,6 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const auth = require("../middleware/authMiddleware");
+const User = require("../models/User"); // ✅ Needed for direct update
 
 // ✅ Get user cart
 router.get("/", auth, async (req, res) => {
@@ -13,18 +14,16 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
-// ✅ Update user cart (overwrite)
+// ✅ Update user cart (overwrite safely without VersionError)
 router.post("/", auth, async (req, res) => {
   try {
     const incomingCart = req.body;
 
-    // Validate each item in incomingCart (basic check)
     if (!Array.isArray(incomingCart)) {
       return res.status(400).json({ msg: "Cart must be an array" });
     }
 
-    req.user.cart = incomingCart;
-    await req.user.save();
+    await User.findByIdAndUpdate(req.user._id, { cart: incomingCart });
 
     res.status(200).json({ msg: "Cart updated" });
   } catch (err) {
@@ -33,11 +32,11 @@ router.post("/", auth, async (req, res) => {
   }
 });
 
-// ✅ Clear user cart
+// ✅ Clear user cart (safe update)
 router.delete("/", auth, async (req, res) => {
   try {
-    req.user.cart = [];
-    await req.user.save();
+    await User.findByIdAndUpdate(req.user._id, { cart: [] });
+
     res.status(200).json({ msg: "Cart cleared" });
   } catch (err) {
     console.error("Cart clear failed:", err);

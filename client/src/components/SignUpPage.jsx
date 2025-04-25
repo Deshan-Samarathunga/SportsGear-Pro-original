@@ -1,9 +1,10 @@
 // client/src/components/SignUpPage.jsx
 import React, { useState, useContext } from "react";
 import axios from "axios";
+import "./style/SignUpPage.css";
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from "react-router-dom";
-import "./SignUpPage.css";
+
 
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);

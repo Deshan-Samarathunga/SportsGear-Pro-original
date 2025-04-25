@@ -1,7 +1,7 @@
 // client/src/components/CheckoutPage.jsx
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./CheckoutPage.css";
+import "./style/CheckoutPage.css";
 
 const CheckoutPage = () => {
   const [order, setOrder] = useState(null);
