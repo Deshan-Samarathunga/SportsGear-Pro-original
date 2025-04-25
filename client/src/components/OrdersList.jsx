@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import SidebarMenu from "./SidebarMenu";
-import "./ProfileSettingsPage.css";
-import "./OrdersList.css";
+import "./style/ProfileSettingsPage.css";
+import "./style/OrdersList.css";
 
 const OrdersList = () => {
   const [orders, setOrders] = useState([]);

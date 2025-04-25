@@ -4,31 +4,33 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 
 import Navbar from './components/Navbar'; 
-import './components/Navbar.css';
+import './components/style/Navbar.css';
 
 import HomePage from "./components/HomePage";
-import './components/HomePage.css';
+import './components/style/HomePage.css';
 
 import SignInPage from "./components/SignInPage";
-import './components/SignInPage.css';
+import './components/style/SignInPage.css';
 
 import SignUpPage from "./components/SignUpPage";
-import './components/SignUpPage.css';
+import './components/style/SignUpPage.css';
 
 import Preloader from "./components/Preloader";
-import './components/Preloader.css';
+import './components/style/Preloader.css';
 
 import ProductsPage from './components/ProductsPage';
-import './components/ProductsPage.css';
+import './components/style/ProductsPage.css';
 
 import ContactUsPage from "./components/ContactUsPage";
-import './components/ContactUsPage.css';
+import './components/style/ContactUsPage.css';
 
 import ProfileSettingsPage from './components/ProfileSettingsPage';
-import './components/ProfileSettingsPage.css';
+import './components/style/ProfileSettingsPage.css';
 
 import ChangePasswordPage from './components/ChangePasswordPage';
+
 import AboutUsPage from './components/AboutUsPage';
+
 import OrdersList from "./components/OrdersList";
 
 import AdminRoutes from "./admin/AdminRoutes";
