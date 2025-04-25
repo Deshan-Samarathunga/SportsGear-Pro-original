@@ -3,6 +3,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import "./style/CartPage.css";
+import emptyCartImg from "../assets/images/empty-cart.png";
+
+
 
 const CartPage = () => {
   const { cart, removeFromCart, updateCartItem } = useCart();
@@ -25,8 +28,32 @@ const CartPage = () => {
   const total = cart.reduce((sum, item) => sum + item.quantity * item.price, 0);
 
   if (cart.length === 0) {
-    return <div className="container py-5"><h4>Your cart is empty.</h4></div>;
+    return (
+      <div className="container d-flex flex-column align-items-center justify-content-center py-5" style={{ minHeight: "60vh" }}>
+        <img src={emptyCartImg} alt="Empty Cart" style={{ width: "180px", opacity: 0.8 }} />
+        <h3 className="mt-4">Your cart is empty</h3>
+        <p className="text-muted">Looks like you haven’t added anything yet.</p>
+        <button
+          className="btn mt-3"
+          onClick={() => navigate("/products")}
+          onMouseEnter={(e) => (e.target.style.backgroundColor = "#e3683f")}
+          onMouseLeave={(e) => (e.target.style.backgroundColor = "#F57C51")}
+          style={{
+            backgroundColor: "#F57C51",
+            color: "white",
+            border: "none",
+            padding: "10px 20px",
+            borderRadius: "5px",
+            transition: "background-color 0.3s ease"
+          }}
+        >
+          Continue Shopping
+        </button>
+
+      </div>
+    );
   }
+
 
   return (
     <div className="container py-5">

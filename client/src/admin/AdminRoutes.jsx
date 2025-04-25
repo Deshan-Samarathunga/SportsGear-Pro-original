@@ -8,6 +8,8 @@ import Orders from "./pages/Orders";
 import ProductsList from "./pages/ProductsList";
 import ProductsAdd from "./pages/ProductsAdd";
 import AdminProtectedRoute from "./components/AdminProtectedRoute";
+import SalesReport from "./pages/SalesReport";
+import InventoryReport from "./pages/InventoryReport"; // ✅ NEW
 
 const AdminRoutes = () => {
   return (
@@ -65,6 +67,26 @@ const AdminRoutes = () => {
         element={
           <AdminProtectedRoute>
             <Orders />
+          </AdminProtectedRoute>
+        }
+      />
+
+      {/* ✅ Sales Report Route */}
+      <Route
+        path="sales"
+        element={
+          <AdminProtectedRoute>
+            <SalesReport />
+          </AdminProtectedRoute>
+        }
+      />
+
+      {/* ✅ Inventory Report Route */}
+      <Route
+        path="inventory"
+        element={
+          <AdminProtectedRoute>
+            <InventoryReport />
           </AdminProtectedRoute>
         }
       />

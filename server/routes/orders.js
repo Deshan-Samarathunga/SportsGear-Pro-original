@@ -60,6 +60,82 @@ router.get("/all", auth, async (req, res) => {
   }
 });
 
+router.get("/report", auth, async (req, res) => {
+  try {
+    if (req.user.role !== "admin") return res.status(403).json({ msg: "Admins only" });
+
+    const now = new Date();
+    const dayAgo = new Date(now);
+    const weekAgo = new Date(now);
+    const monthAgo = new Date(now);
+
+    dayAgo.setDate(dayAgo.getDate() - 1);
+    weekAgo.setDate(weekAgo.getDate() - 7);
+    monthAgo.setMonth(monthAgo.getMonth() - 1);
+
+    const [daily, weekly, monthly, history] = await Promise.all([
+      Order.aggregate([
+        { $match: { createdAt: { $gte: dayAgo } } },
+        { $group: { _id: null, count: { $sum: 1 }, total: { $sum: { $multiply: ["$quantity", "$price"] } } } }
+      ]),
+      Order.aggregate([
+        { $match: { createdAt: { $gte: weekAgo } } },
+        { $group: { _id: null, count: { $sum: 1 }, total: { $sum: { $multiply: ["$quantity", "$price"] } } } }
+      ]),
+      Order.aggregate([
+        { $match: { createdAt: { $gte: monthAgo } } },
+        { $group: { _id: null, count: { $sum: 1 }, total: { $sum: { $multiply: ["$quantity", "$price"] } } } }
+      ]),
+      Order.find().sort({ createdAt: -1 })
+    ]);
+
+    res.json({
+      daily: daily[0] || { count: 0, total: 0 },
+      weekly: weekly[0] || { count: 0, total: 0 },
+      monthly: monthly[0] || { count: 0, total: 0 },
+      history
+    });
+  } catch (err) {
+    console.error("Failed to generate report", err);
+    res.status(500).json({ msg: "Failed to generate report" });
+  }
+});
+
+
+
+router.get("/summary", auth, async (req, res) => {
+  try {
+    if (req.user.role !== "admin") {
+      return res.status(403).json({ msg: "Access denied" });
+    }
+
+    const now = new Date();
+
+    const startOfDay = new Date(now);
+    startOfDay.setHours(0, 0, 0, 0);
+
+    const startOfWeek = new Date(now);
+    startOfWeek.setDate(now.getDate() - now.getDay());
+    startOfWeek.setHours(0, 0, 0, 0);
+
+    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+
+    const [daily, weekly, monthly] = await Promise.all([
+      Order.countDocuments({ createdAt: { $gte: startOfDay } }),
+      Order.countDocuments({ createdAt: { $gte: startOfWeek } }),
+      Order.countDocuments({ createdAt: { $gte: startOfMonth } }),
+    ]);
+
+    res.json({ daily, weekly, monthly });
+  } catch (err) {
+    console.error("Summary fetch error:", err);
+    res.status(500).json({ msg: "Server error while fetching summary" });
+  }
+});
+
+
+
+
 // ✅ Update order status (for admin)
 router.patch("/:id/status", auth, async (req, res) => {
   try {
