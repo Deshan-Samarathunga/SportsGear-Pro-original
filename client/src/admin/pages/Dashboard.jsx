@@ -10,7 +10,7 @@ const Dashboard = () => {
   const [orderCount, setOrderCount] = useState(0);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("adminToken");
   
     const config = {
       headers: {
@@ -26,10 +26,11 @@ const Dashboard = () => {
       .then(res => setUserCount(res.data.length))
       .catch(err => console.error("Failed to fetch users", err));
   
-    axios.get("http://localhost:5000/api/orders", config)
+    axios.get("http://localhost:5000/api/orders/all", config)
       .then(res => setOrderCount(res.data.length))
       .catch(err => console.error("Failed to fetch orders", err));
   }, []);
+  
   
 
   return (
