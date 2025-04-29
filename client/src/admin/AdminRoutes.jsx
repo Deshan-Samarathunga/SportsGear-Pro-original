@@ -9,8 +9,7 @@ import ProductsList from "./pages/ProductsList";
 import ProductsAdd from "./pages/ProductsAdd";
 import AdminProtectedRoute from "./components/AdminProtectedRoute";
 import SalesReport from "./pages/SalesReport";
-import InventoryReport from "./pages/InventoryReport"; // ✅ NEW
-
+import InventoryReport from "./pages/InventoryReport";
 const AdminRoutes = () => {
   return (
     <Routes>
